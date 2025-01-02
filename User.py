@@ -25,6 +25,11 @@ class User_registration:
   def check_password(self, password):
     pattern = r'([*$#^&*@!0-9A-Za-z]+){8,}'
     return bool(re.search(pattern, password))
+  
+  @staticmethod
+  def check_email_samples(email):
+    pattern = r'^[a-z]+([-_.])?[a-z0-9]+@[a-z]+\.[a-z]{,3}([\.a-z]{,3})?$'
+    return bool(re.match(pattern, email))
 
   def register(self):
     if self.check_name(self.fname) and self.check_name(self.lname) and self.check_email(self.email) and self.check_mobile(self.mobile) and self.check_password(self.password):
@@ -36,13 +41,24 @@ class User_registration:
       return False
 
 while True:
-  print("User Registration Process")
-  fname = input("Enter First Name: ")
-  lname = input("Enter Last Name: ")
-  email = input("Enter Email: ")
-  mobile = input("Enter Mobile Number: ")
-  password = input("Enter Password: ")
+  print("Press \'1\' to check email samples")
+  print("Press \'2\' to register")
+  option = int(input("Enter the choice"))
 
-  user = User_registration(fname, lname, email, mobile, password)
-  if user.register():
-    break
+  if option == 1:
+    email = input("Enter the email: ")
+    if User_registration.check_email_samples(email):
+      print("Email is valid")
+    else:
+      print("Email is invalid")
+    
+  else:
+    print("User Registration Process")
+    fname = input("Enter First Name: ")
+    lname = input("Enter Last Name: ")
+    email = input("Enter Email: ")
+    mobile = input("Enter Mobile Number: ")
+    password = input("Enter Password: ")
+    user = User_registration(fname, lname, email, mobile, password)
+    if user.register():
+      break
