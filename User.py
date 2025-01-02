@@ -23,7 +23,7 @@ class User_registration:
     return bool(re.match(pattern, mobile))
   
   def check_password(self, password):
-    pattern = r'([A-Za-z]+){8,}'
+    pattern = r'([A-Za-z0-9]+){8,}'
     return bool(re.search(pattern, password))
 
   def register(self):
